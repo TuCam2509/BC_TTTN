@@ -20,4 +20,35 @@
             font-size: $base-size + 1px;
         }
     }
+    .languages{
+
+        .welcome{
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        .user_icon{
+            margin-right: 5px;
+        }
+        .en{
+            margin-right: 15px;
+            margin-left: 10px;
+            cursor: pointer;
+
+            &.active{
+                opacity: 1;
+                color: blue;
+                font-weight: 500;
+            }
+        }
+        .vi{
+            cursor: pointer;
+            
+            &.active{
+                opacity: 1;
+                color: rgb(30, 0, 255);
+                font-weight: 500;
+            }
+        
+        }
+    }
 }
