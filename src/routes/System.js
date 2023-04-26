@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/Admin/UserRedux';
+import ManagerDoctor from '../containers/System/Admin/ManagerDoctor'
 import Header from '../containers/Header/Header';
+import DetailDoctor from '../containers/Patient/Doctor/DetailDoctor';
+import Manager_specialty from '../containers/System/Specialty/Manager_specialty';
+import ManagerClinic from '../containers/System/Clinic/ManagerClinic';
+
 
 class System extends Component {
     render() {
@@ -16,6 +21,9 @@ class System extends Component {
                     <Switch>
                         <Route path="/system/user-manage" component={UserManage} />
                         <Route path="/system/user-redux" component={UserRedux} />
+                        <Route path="/system/manager-doctor" component={ManagerDoctor} />
+                        <Route path="/system/manage-specialty" component={Manager_specialty} />
+                        <Route path ="/system/manage-clinic" component={ManagerClinic}/>
                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                     </Switch>
                 </div>

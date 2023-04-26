@@ -8,7 +8,11 @@ const initialState = {
     genders:[],
     roles:[],
     positions:[],
-    users:[]
+    users:[],
+    topDoctors:[],
+    allDoctors:[],
+    allScheduleTime:[],
+    allRequireData:[]
       
 }
 
@@ -68,8 +72,59 @@ const adminReducer = (state = initialState, action) => {
     
                 return {
                     ...state
-                }  
+                } 
+                case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+                    state.topDoctors=action.dataDoctor
+        
+                    return {
+                        ...state
+                    } 
+                    case actionTypes.FETCH_TOP_DOCTOR_FAIL:
+                        state.topDoctors=[]
             
+                        return {
+                            ...state
+                        }
+                    case actionTypes.FETCH_ALL_DOCTOR_SUCCESS:
+                    state.allDoctors=action.dataDr
+        
+                    return {
+                        ...state
+                    } 
+                    case actionTypes.FETCH_ALL_DOCTOR_FAIL:
+                        state.allDoctors=[]
+            
+                        return {
+                            ...state
+                        }
+                        case actionTypes.FETCH_ALLCODE_SCHEDULE_HOUR_SUCCESS:
+                            state.allScheduleTime=action.dataTime
+                
+                            return {
+                                ...state
+                            } 
+                            case actionTypes.FETCH_ALLCODE_SCHEDULE_HOUR_FAIL:
+                                state.allScheduleTime=[]
+                    
+                                return {
+                                    ...state
+                                }
+                                case actionTypes.FETCH_REQUIED_DOCTOR_PRICE_SUCCESS:
+                                    state.allRequireData=action.data
+
+                                    console.log('check requied doctor:',state,action)
+                        
+                                    return {
+                                        ...state
+                                    } 
+                                    case actionTypes.FETCH_REQUIED_DOCTOR_PRICE_FAIL:
+                                        state.allRequireData=[]
+                            
+                                        return {
+                                            ...state
+                                        }
+                              
+                
 
             
         default:

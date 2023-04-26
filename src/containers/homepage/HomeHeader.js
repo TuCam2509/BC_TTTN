@@ -9,11 +9,17 @@ import {faHospital,faFlag} from '@fortawesome/free-regular-svg-icons'
 import logo from '../../assets/booking.png'
 import {LANGUAGES} from '../../utils'
 import {changeLanguageApp} from '../../store/actions'
+import {withRouter} from 'react-router'
 
 class HomeHeader extends Component {
     handleLanguage=(language)=>{
         this.props.changeLanguageAppRedux(language)
 
+    }
+    returnToHome=()=>{
+        if(this.props.history){
+            this.props.history.push('/home')
+        }
     }
 
     render() {
@@ -27,7 +33,7 @@ class HomeHeader extends Component {
                     <div className='left-content'>
                         <FontAwesomeIcon className='menu' icon={faBars}/>
                         <div className='header-logo'>
-                         <img src={logo}/>
+                         <img src={logo} onClick={()=>this.returnToHome()}/>
                         </div>
 
                     </div>
@@ -61,6 +67,7 @@ class HomeHeader extends Component {
                     </div>
 
                 </div>
+                {this.props.isShowBanner===true &&
                 <div className='home-header-baner'>
             <div className='content-up'>
                 <div className='title1'><FormattedMessage id="home-header.economic background"/></div>
@@ -101,6 +108,7 @@ class HomeHeader extends Component {
             </div>
 
                 </div>
+    }
 
             </React.Fragment>
         );
@@ -121,4 +129,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

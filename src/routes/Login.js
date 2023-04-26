@@ -83,6 +83,7 @@ class Login extends Component {
             this.btnLogin.current.click();
         }
     };
+   
 
     componentDidMount() {
         document.addEventListener('keydown', this.handlerKeyDown);
@@ -95,6 +96,7 @@ class Login extends Component {
             return;
         };
     }
+   
 
     render() {
         const { username, password, loginError } = this.state;
@@ -130,6 +132,7 @@ class Login extends Component {
                                 className="form-control"
                                 value={password}
                                 onChange={this.onPasswordChange}
+                                onKeyDown={this.handlerKeyDown}
                             />
                         </div>
 

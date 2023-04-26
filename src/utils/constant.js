@@ -1,8 +1,15 @@
 export const path = {
     HOME: '/',
+    HOMEPAGE:'/home',
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system'
+    SYSTEM: '/system',
+    DETAIL_DOCTOR:'/detail-doctor/:id',
+    DETAIL_SPEC:'/detail-specialty/:id',
+    DETAIL_CLINIC:'/detail-clinic/:id',
+
+    VERIFY_BOOKING_EMAIL:'/verify-booking'
+
 };
 
 export const LANGUAGES = {
@@ -24,4 +31,10 @@ export const dateFormat = {
 export const YesNoObj = {
     YES: 'Y',
     NO: 'N'
+}
+
+export const USER_ROLE = {
+    ADMIN:'R1',
+    DOCTOR:'R2',
+    PARIENT:'R3'
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import {LANGUAGES,CRUD_ACTIONS} from '../../../utils'
+import {LANGUAGES,CRUD_ACTIONS,CommonUtils} from '../../../utils'
 import * as actions from '../../../store/actions'
 import Lightbox from 'react-image-lightbox'
 import 'react-image-lightbox/style.css'
@@ -62,7 +62,7 @@ class UserRedux extends Component {
             let arrGendres=this.props.genderRedux
             this.setState({
                 genderArr:arrGendres,
-                gender:arrGendres && arrGendres.length>0 ? arrGendres[0].key:''
+                gender:arrGendres && arrGendres.length>0 ? arrGendres[0].keyMap:''
 
             })
         }
@@ -70,7 +70,7 @@ class UserRedux extends Component {
             let arrPositions=this.props.positionRedux
             this.setState({
                 positionArr:arrPositions,
-                position:arrPositions && arrPositions.length>0 ? arrPositions[0].key:''
+                position:arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap:''
 
             })
         }
@@ -78,7 +78,7 @@ class UserRedux extends Component {
             let arrRole=this.props.roleRedux
             this.setState({
                 roleArr:arrRole,
-                role:arrRole && arrRole.length>0 ? arrRole[0].key:''
+                role:arrRole && arrRole.length>0 ? arrRole[0].keyMap:''
 
             })
         }
@@ -93,24 +93,26 @@ class UserRedux extends Component {
             lastName:'',
             phoneNumber:'',
             address:'',
-            gender:arrGendres && arrGendres.length>0 ? arrGendres[0].key:'',
-            position:arrPositions && arrPositions.length>0 ? arrPositions[0].key:'',
-            role:arrRole && arrRole.length>0 ? arrRole[0].key:'',
+            gender:arrGendres && arrGendres.length>0 ? arrGendres[0].keyMap:'',
+            position:arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap:'',
+            role:arrRole && arrRole.length>0 ? arrRole[0].keyMap:'',
             avatar:'',
             action:CRUD_ACTIONS.CREATE,
+            prevImgUrl:''
            
             })
         }
     
     }
-    handleChangeImage=(event)=>{
+    handleChangeImage=async(event)=>{
         let data=event.target.files;
         let file=data[0]
         if(file){
+            let base64=await CommonUtils.getBase64(file)
             let objectUrl=URL.createObjectURL(file)
             this.setState({
                 prevImgUrl:objectUrl,
-                avatar:file
+                avatar:base64
             })
         }
 
@@ -135,7 +137,8 @@ class UserRedux extends Component {
                     phoneNumber:this.state.phoneNumber,
                     gender:this.state.gender,
                     roleId:this.state.role,
-                    positionId:this.state.position
+                    positionId:this.state.position,
+                    avatar:this.state.avatar
        })}
        if(action===CRUD_ACTIONS.EDIT){
         this.props.editNewUserRedux({
@@ -149,7 +152,7 @@ class UserRedux extends Component {
             gender:this.state.gender,
             roleId:this.state.role,
             positionId:this.state.position,
-            //avatar:this.state.avatar
+            avatar:this.state.avatar
 
         })
 
@@ -182,6 +185,11 @@ class UserRedux extends Component {
 
     }
     handleEditUserFormParent=(user)=>{
+        let imageBase64=''
+        if(user.image){
+            imageBase64=new Buffer(user.image,'base64',toString('binary'))
+            console.log('base64',imageBase64)
+        }
         this.setState({
             email:user.email,
             password:'HARDCODE',
@@ -190,11 +198,14 @@ class UserRedux extends Component {
             phoneNumber:user.phoneNumber,
             address:user.address,
             gender:user.gender,
-            position:user.position,
+            position:user.positionId,
             role:user.roleId,
-            avatar:'',
+            avatar: '',
+            prevImgUrl:imageBase64,
             action:CRUD_ACTIONS.EDIT,
             userEditId:user.id
+            },()=>{
+                console.log("check base 64",this.state)
             })
 
     }
@@ -292,7 +303,7 @@ class UserRedux extends Component {
                             <select className='form-control'  onChange={(event)=>{this.onChangeInput(event,'gender')}} value={gender}>
                             {genders && genders.length>0 && genders.map((item,index)=>{
                                     return (
-                                        <option key={index} value={item.key}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
+                                        <option key={index} value={item.keyMap}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
                                     )
                                 })}
                             </select>
@@ -302,7 +313,7 @@ class UserRedux extends Component {
                             <select className='form-control'  onChange={(event)=>{this.onChangeInput(event,'position')}} value={position}>
                             {positions && positions.length>0 && positions.map((item,index)=>{
                                     return (
-                                        <option key={index} value={item.key}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
+                                        <option key={index} value={item.keyMap}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
                                     )
                                 })}
                             </select>
@@ -312,7 +323,7 @@ class UserRedux extends Component {
                             <select className='form-control'onChange={(event)=>{this.onChangeInput(event,'role')}} value={role} >
                             {roles && roles.length>0 && roles.map((item,index)=>{
                                     return (
-                                        <option key={index} value={item.key}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
+                                        <option key={index} value={item.keyMap}>{language===LANGUAGES.VI ?item.valueVi:item.valueEn}</option>
                                     )
                                 })}
                             </select>

@@ -9,7 +9,7 @@
         "examination package":"Examination package",
         "General health check":"General health check",
         "supported":"Support",
-        "economic background":"economic background",
+        "economic background":"economic platform",
          "care":"COMPREHENSIVE HEALTH CARE",
          "Welcome":"Welcome ,"
         
@@ -54,6 +54,10 @@
             "crud":"CRUD-sever",
             "crud-redux":"CRUD-redux"
 
+        },
+        "doctor":{
+            "manager-schedule":"Manager-Schedule",
+            "manager-patient":"Manager-Patient"
         }
        
     },
@@ -73,6 +77,63 @@
         "edit":"Save changes"
 
 
+    },
+    "homepage":{
+        "outstanding-doctor":"Last week's featured doctor",
+        "more":"See more",
+        "outstanding-medical":"Outstanding medical facility"
+    },
+    "manager-schedule":{
+        "title":"Manage doctor's examination plan",
+        "choose-doctor":"Choose doctor",
+        "choose-date":"Choose-date",
+        "save":"Save infor"
+    },
+    "parient":{
+        "detail-doctor":{
+            "schedule":"Schedule",
+            "no-schedule":"The doctor does not have an appointment at this time, please choose another time",
+            "booking":"Choose and book for free"
+        },
+        "extra-detail-doctor":{
+            "address-clinic":"Address Clinic",
+            "price":"Price",
+            "See details":"See details",
+            "note":"Note: ",
+            "payment":"Patients can pay by",
+            "Hide price list":"Hide price list"
+        },
+        "booking-modal":{
+            "title":"Information to book a medical appointment",
+            "fullName":"Full Name",
+            "phone":"Phone Number",
+            "email":"Email",
+            "address":"Address",
+            "reason":"Reason",
+            "birthday":"Date of birthday",
+            "genders":"Gender",
+            "btnConfrom":"Confirm",
+            "btnCancel":"Cancel",
+            "free":"Book an appointment for free"
+
+
+        }
+    },
+    "admin":{
+        "manager-doctor":"Create Doctor Information",
+        "choose-doctor":"Choose Doctor",
+        "introductory information":"Introductory Information",
+        "save-info":"Save info",
+        "create-info":"Create info",
+        "choose-price":"Medical Examination Price",
+        "paymentmethods":"Payment Methods",
+        "province":"Province",
+        "clinicname":"Clinic Name",
+        "addressclinic":"Address Clinic",
+        "note":"Note",
+        "specialty":"Choose Specialty",
+        "selectedClinic":"Choose Clinic"
     }
+
 
 }

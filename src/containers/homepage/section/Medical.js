@@ -3,44 +3,62 @@ import { connect } from 'react-redux';
 import './Medical.scss';
 import {FormattedMessage} from 'react-intl';
 import Slider from "react-slick";
+import {getAllClinic} from '../../../services/useService'
+import {withRouter} from 'react-router'
+
 
 class  Medical extends Component {
 
+  constructor(props){
+    super(props)
+    this.state={
+      dataClinics:[]
+    }
+
+  }
+  async componentDidMount(){
+    let res=await getAllClinic()
+    if(res && res.errCode===0){
+      this.setState({
+        dataClinics:res.data ? res.data :[]
+      })
+    }
+    console.log("check res clinic:",res)
+
+  }
+  handleChangeClinic=(clinnic)=>{
+    if(this.props.history){
+      this.props.history.push(`/detail-clinic/${clinnic.id}`)
+  }
+
+  }
+
     render() {
+      let {dataClinics}=this.state
+
 
         return (
             <div className=' section_share section_medical'>
                 <div className='section-container'>
                   <div className=' section-header'>
-                    <span className='title-section'>Cơ sở y tế nổi bật</span>
-                    <button className='btn-section'>Xem thêm</button>
+                    <span className='title-section'><FormattedMessage id="homepage.outstanding-medical"/></span>
+                    <button className='btn-section'><FormattedMessage id="homepage.more"/></button>
                   </div>
                   <div className=' section-body'>
             <Slider {...this.props.settings}>
-                   <div className=' section-customzie'>
-                    <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 1</div>
+              {dataClinics && dataClinics.length>0 && dataClinics.map((item,index)=>{
+                   return (
+                   <div className=' section-customzie'
+                   onClick={()=>this.handleChangeClinic(item)}
+                    key={index}>
+                    <div className='bg-img section_medical'
+                       style={{backgroundImage:`url(${item.image})`}}
+                    />
+                     <div className='clinic-name'>{item.name}</div>
                    </div>
-                   <div className=' section-customzie'>
-                     <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 2</div>
-                   </div>
-                   <div className=' section-customzie'>
-                     <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 3</div>
-                   </div>
-                    <div className=' section-customzie'>
-                      <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 4</div>
-                   </div>
-                   <div className=' section-customzie'>
-                     <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 5</div>
-                   </div>
-                   <div className=' section-customzie'>
-                     <div className='bg-img section_medical'/>
-                     <div>Bệnh viện Hữu nghị Việt đức 6 </div>
-                   </div>
+
+                   )
+              })}
             </Slider>
 
                   </div>
@@ -63,4 +81,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)( Medical);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)( Medical));

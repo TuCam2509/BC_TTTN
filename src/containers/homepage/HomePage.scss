@@ -32,6 +32,9 @@
     }
     
 }
+.slick-disabled{
+    display: none !important;
+}
 .slick-next::before{
     font-family:FontAwesome !important;
     color: rgb(74, 61, 61) !important;
@@ -59,22 +62,30 @@
                 background-color: #eee;
                 
                 &.section_spec{
-                    background-image: url(../../assets/speciatly/nhi.jpg);
+                    //background-image: url(../../assets/speciatly/nhi.jpg);
                     
                 }
                 &.section_medical{
-                    background-image: url(../../assets/medical/vietduc.jpg);
+                    //background-image: url(../../assets/medical/vietduc.jpg);
                     
                     
                 }
                 &.section_OutStandingDoctor{
-                    background-image: url(../../assets/Outstanding/anhdaidien.jpg);
+                    //background-image: url(../../assets/Outstanding/anhdaidien.jpg);
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;
                 }
                 &.section_handbook{
                     background: url(../../assets/handbook/handbook1.jpg);
+                }
+            }
+            .spec-name{
+                padding: 10px 0;
+                font-size: 14px;
+                &:hover{
+                    color: rgb(40, 158, 236);
+                    cursor: pointer;
                 }
             }
         }
@@ -127,6 +138,7 @@
     }
     .section-customzie{
         padding: 5px;
+        cursor: pointer;
 
         .customzie-body{
             padding: 20px;
